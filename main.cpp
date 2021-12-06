@@ -20,7 +20,7 @@ int main() {
 	sf::Sprite plane1;
 	sf::Sprite background;
 
-	if (!planetexture.loadFromFile("files/airplane2.png")) {
+	if (!planetexture.loadFromFile("files/airplane.png")) {
 		std::cerr << "Failed to load texture for planes" << std::endl;
 		return EXIT_FAILURE;
 	}

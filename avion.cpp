@@ -29,10 +29,10 @@ bool Avion::emergency_landing() {
 	}
 }
 
-std::string Avion::get_aeorport_arrive() {
-	return aeorport_arrive;
+std::string Avion::get_aeroport_arrive() {
+	return aeroport_arrive;
 }
 
-std::string Avion::get_aeorport_depart() {
-	return aeorport_depart;
+std::string Avion::get_aeroport_depart() {
+	return aeroport_depart;
 }
