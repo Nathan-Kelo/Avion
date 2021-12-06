@@ -5,8 +5,8 @@
 class Avion {
 private:
 	const std::string code_de_vol;
-	std::string aeorport_depart;
-	std::string aeorport_arrive;
+	std::string aeroport_depart;
+	std::string aeroport_arrive;
 	int altitude;
 	float vitesse;
 	float niveau_essence;
@@ -14,8 +14,8 @@ private:
 	bool defaillance_avion = false;
 public:
 	//std::string get_trajectory();
-	std::string get_aeorport_depart();
-	std::string get_aeorport_arrive();
+	std::string get_aeroport_depart();
+	std::string get_aeroport_arrive();
 	float get_vitesse();
 	float get_niveau_essence();
 	int get_altitude();
