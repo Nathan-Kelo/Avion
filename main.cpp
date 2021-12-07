@@ -9,16 +9,25 @@
 
 using json = nlohmann::json;
 
+const sf::Vector2u WINDOW_SIZE(800, 600);
+const sf::Vector2f PLANE_SIZE(100, 100);
+const sf::Vector2f circle_vector(1, 1);
+
+void doCircle(sf::RectangleShape& plane) {
+	plane.move(circle_vector);
+	plane.rotate(1);
+}
+
 int main() {
-	const sf::Vector2u WINDOW_SIZE(800, 600);
+
 	//std::ifstream listavion("files/listavion.json");
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE.x,WINDOW_SIZE.y), "My window");
 	window.setVerticalSyncEnabled(true);
 	
 	sf::Texture planetexture;
 	sf::Texture backgroundtexture;
-	sf::Sprite plane1;
-	sf::Sprite background;
+	sf::RectangleShape plane1(PLANE_SIZE);
+	sf::RectangleShape background(sf::Vector2f(WINDOW_SIZE.x,WINDOW_SIZE.y));
 
 	if (!planetexture.loadFromFile("files/airplane.png")) {
 		std::cerr << "Failed to load texture for planes" << std::endl;
@@ -34,9 +43,9 @@ int main() {
 	backgroundtexture.isRepeated();
 	
 
-	background.setTexture(backgroundtexture);
-	background.setScale(2., 2.);
-	plane1.setTexture(planetexture);
+	background.setTexture(&backgroundtexture);
+	
+	plane1.setTexture(&planetexture);
 	
 	
 	while (window.isOpen()) {
@@ -48,6 +57,7 @@ int main() {
 		window.clear(sf::Color::Black);
 		window.draw(background);
 		window.draw(plane1);
+		doCircle(plane1);
 		window.display();
 	}
 	/*json avions;
