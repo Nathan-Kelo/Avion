@@ -1,13 +1,21 @@
+
+
 #include <iostream>
 #include <ctime>
-#include "avion.h"
-#include  "nlohmann/json.hpp"
+#include <thread>
+#include <chrono>
 #include <fstream>
+#include <cmath>
+
+#include "avion.h"
+
+#include  "nlohmann/json.hpp"
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 
 using json = nlohmann::json;
+
 
 const sf::Vector2u WINDOW_SIZE(800, 600);
 const sf::Vector2f PLANE_SIZE(100, 100);
@@ -19,8 +27,8 @@ void doCircle(sf::RectangleShape& plane) {
 }
 
 int main() {
-
-	//std::ifstream listavion("files/listavion.json");
+	/*
+		//std::ifstream listavion("files/listavion.json");
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE.x,WINDOW_SIZE.y), "My window");
 	window.setVerticalSyncEnabled(true);
 	
