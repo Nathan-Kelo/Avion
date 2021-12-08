@@ -15,7 +15,7 @@ void update_avion(Avion& avion, bool& stop_thread) {
 }
 
 
-Avion::Avion(const sf::Texture Texture, float speed,float init_angle, float aeroport_depart_x, float aeroport_depart_y, float aeroport_arrive_x, float aeroport_arrive_y) :
+Avion::Avion(sf::Texture &Texture, float speed,float init_angle, float aeroport_depart_x, float aeroport_depart_y, float aeroport_arrive_x, float aeroport_arrive_y) :
 	aeroport_depart_x(aeroport_depart_x), aeroport_depart_y(aeroport_depart_y),
 	aeroport_arrive_x(aeroport_arrive_x), aeroport_arrive_y(aeroport_arrive_y),
 	x_(aeroport_depart_x), y_(aeroport_depart_y),angle_(init_angle *PI_F/180.f),
