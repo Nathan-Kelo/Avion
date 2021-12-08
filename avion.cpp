@@ -18,7 +18,8 @@ void update_avion(Avion& avion, bool& stop_thread) {
 Avion::Avion(sf::Texture Texture, float speed, float aeroport_depart_x, float aeroport_depart_y, float aeroport_arrive_x, float aeroport_arrive_y):	
 	aeroport_depart_x(aeroport_depart_x),aeroport_depart_y(aeroport_depart_y),
 	aeroport_arrive_x(aeroport_arrive_x),aeroport_arrive_y(aeroport_arrive_y),
-	speed_(speed)
+	speed_(speed),x_(aeroport_depart_x),y_(aeroport_depart_y)
+	
 {
 	sprite.setTexture(&Texture);	
 	sprite.setPosition(aeroport_depart_x,aeroport_depart_y);
@@ -35,7 +36,7 @@ void Avion::circle_trajectory() {
 	angle_ -= rotation_speed * static_cast<float>(dt);
 	x_ = (radius_ * cos(angle_)) + aeroport_arrive_x;
 	y_ = (radius_ * sin(angle_)) + aeroport_arrive_y;
-	
+	std::cout << "--------We are doing a circle trajectory--------\n\tx :" << x_ << "\n\ty :" << y_ << std::endl;
 }
 
 void Avion::line_trajectory() {
@@ -46,10 +47,11 @@ void Avion::line_trajectory() {
 	float distance_x = aeroport_arrive_x - aeroport_depart_x;
 	float distance_y = aeroport_arrive_y - aeroport_depart_y;
 	float distance_total = sqrt(distance_x * distance_x + distance_y * distance_y);
-	x_ += distance_x/distance_total * speed_;
-	y_ += distance_y/ distance_total * speed_;	
+	x_ += distance_x / distance_total * speed_;
+	y_ += distance_y / distance_total * speed_;
+	//TODO rotation and angle of plane 
+	std::cout << "--------We are doing a line trajectory--------\n\tx :" << x_ << "\n\ty :" << y_ << std::endl;
 }
-
 Avion::~Avion() {
 	stop_thread = true;
 	t_.join();
