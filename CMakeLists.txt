@@ -35,7 +35,7 @@ if(NOT sfml_POPULATED)
   add_subdirectory(${sfml_SOURCE_DIR} ${sfml_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif()
 
-set(SRCS "main.cpp" "avion.cpp")
+set(SRCS "main.cpp" "avion.cpp" "aeroport.cpp" "create_aeroport.cpp")
 set(SFML_THINGS sfml-graphics sfml-window sfml-system)
 
 set(CMAKE_CXX_STANDARD 20)
