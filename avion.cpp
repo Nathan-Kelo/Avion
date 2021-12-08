@@ -1,9 +1,7 @@
 #include "avion.h"
-#include <string>
-
-#define CHANCE_DEFAILLANCE 2	//2 chance sur 100 tout les 100km
 
 constexpr int radius_ = 5;
+constexpr float PI_F = static_cast<float>(M_PI);
 
 void update_avion(Avion& avion, bool& stop_thread) {
 	while (!stop_thread) {
@@ -17,10 +15,11 @@ void update_avion(Avion& avion, bool& stop_thread) {
 }
 
 
-Avion::Avion(const sf::Texture Texture, float speed, float aeroport_depart_x, float aeroport_depart_y, float aeroport_arrive_x, float aeroport_arrive_y):	
-	aeroport_depart_x(aeroport_depart_x),aeroport_depart_y(aeroport_depart_y),
-	aeroport_arrive_x(aeroport_arrive_x),aeroport_arrive_y(aeroport_arrive_y),
-	speed_(speed),x_(aeroport_depart_x),y_(aeroport_depart_y),
+Avion::Avion(const sf::Texture Texture, float speed,float init_angle, float aeroport_depart_x, float aeroport_depart_y, float aeroport_arrive_x, float aeroport_arrive_y) :
+	aeroport_depart_x(aeroport_depart_x), aeroport_depart_y(aeroport_depart_y),
+	aeroport_arrive_x(aeroport_arrive_x), aeroport_arrive_y(aeroport_arrive_y),
+	x_(aeroport_depart_x), y_(aeroport_depart_y),angle_(init_angle *PI_F/180.f),
+	speed_(speed), rotation_speed(speed / 2.f*PI_F*radius_),
 	distance_parcouru_trajet(0),distance_total(0)
 {	
 	sprite.setSize(sf::Vector2f(50, 50));

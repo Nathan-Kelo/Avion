@@ -49,10 +49,10 @@ void visualization(std::vector<std::unique_ptr<Avion>>& avions) {
 			if (event.type == sf::Event::Closed) window.close();
 		}
 		window.clear();
-		window.draw(background);
+		//window.draw(background);
 		for (auto& avions : avions) {
 			window.draw(avions->update_sprite());
-			//std::cout << "We moved a plane" << std::endl;
+			
 		}
 		window.display();
 	}
@@ -81,7 +81,8 @@ int main() {
 
 	//Avion plane1;//NEED TO PUT IN ALL THE ARGS	
 	
-	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, ap1.x, ap1.y, ap2.x, ap2.y));
+	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2,25.f, ap1.x, ap1.y, ap2.x, ap2.y));
+	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2,25.f, ap2.x, ap2.y, ap1.x, ap1.y));
 
 	std::thread UI(visualization, std::ref(avions));
 
