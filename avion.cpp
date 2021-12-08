@@ -15,14 +15,17 @@ void update_avion(Avion& avion, bool& stop_thread) {
 }
 
 
-Avion::Avion(sf::Texture Texture, float speed, float aeroport_depart_x, float aeroport_depart_y, float aeroport_arrive_x, float aeroport_arrive_y):	
+Avion::Avion(const sf::Texture Texture, float speed, float aeroport_depart_x, float aeroport_depart_y, float aeroport_arrive_x, float aeroport_arrive_y):	
 	aeroport_depart_x(aeroport_depart_x),aeroport_depart_y(aeroport_depart_y),
 	aeroport_arrive_x(aeroport_arrive_x),aeroport_arrive_y(aeroport_arrive_y),
 	speed_(speed),x_(aeroport_depart_x),y_(aeroport_depart_y)
 	
-{
+{	
+	sprite.setSize(sf::Vector2f(50, 50));
 	sprite.setTexture(&Texture);	
 	sprite.setPosition(aeroport_depart_x,aeroport_depart_y);
+	if (sprite.getTexture())std::cout << "We have a texture for the plane" << std::endl;
+	else std::cout << "We dont have a texture for the plane" << std::endl;
 	stop_thread = false;
 	initial_clock_ = high_resolution_clock::now();	
 	t_ = std::thread(update_avion, std::ref(*this), std::ref(stop_thread));

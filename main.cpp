@@ -52,7 +52,7 @@ void visualization(std::vector<std::unique_ptr<Avion>>& avions) {
 		window.draw(background);
 		for (auto& avions : avions) {
 			window.draw(avions->update_sprite());
-			std::cout << "We moved a plane" << std::endl;
+			//std::cout << "We moved a plane" << std::endl;
 		}
 		window.display();
 	}

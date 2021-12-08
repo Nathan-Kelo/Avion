@@ -39,7 +39,7 @@ private:
 	float consomation_essence;	
 	bool defaillance_avion = false;*/
 public:
-	Avion(sf::Texture Texture,float speed,float aeroport_depart_x, float aeroport_depart_y, float aeroport_arrive_x,float aeroport_arrive_y);
+	Avion(const sf::Texture Texture,float speed,float aeroport_depart_x, float aeroport_depart_y, float aeroport_arrive_x,float aeroport_arrive_y);
 	/*Draws a cirlce around a designated center
 	*/
 	void circle_trajectory();
