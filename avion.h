@@ -19,7 +19,7 @@ using namespace std::chrono_literals;
 class Avion {
 private:
 	std::thread t_;
-	bool stop_thread;
+	bool stop_thread = false ;
 	high_resolution_clock::time_point initial_clock_;
 	sf::RectangleShape sprite;
 	
@@ -30,19 +30,20 @@ private:
 	float speed_ = 0.;
 	float rotation_speed = 0.;
 	float angle_ = 0.;
-	/*std::string aeroport_depart;
-	std::string aeroport_arrive;
-	int altitude;
-	float vitesse;
+	float aeorport_depart_x = 0.;
+	float aeorport_depart_y = 0.;
+	float aeorport_arrive_x = 0.;
+	float aeorport_arrive_y = 0.;
+	/*	
 	float niveau_essence;
 	float consomation_essence;	
 	bool defaillance_avion = false;*/
 public:
-	Avion();
+	Avion(sf::Texture Texture);
 	/*Draws a cirlce around a designated center
 	*/
-	sf::RectangleShape circle_trajectory();
-	sf::RectangleShape line_trajectory();
+	void circle_trajectory();
+	void line_trajectory();
 	sf::RectangleShape update_sprite();
 	float get_speed();
 	float get_altitude();
