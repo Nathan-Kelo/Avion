@@ -1,0 +1,27 @@
+{
+  "list_aeroport": [
+    {
+      "id": 0,
+      "nom": "Paris-Charles_de_Gaulle",
+      "places" : 45,
+      "x": 405,
+      "y": 511
+    },
+
+    {
+      "id": 1,
+      "nom": "Paris-Orly",
+      "places":  30,
+      "x": 612,
+      "y": 107
+    },
+    {
+      "id": 2,
+      "nom": "Marseille-Provence",
+      "places":  15,
+      "x": 305,
+      "y": 546
+    }
+
+  ]
+}
