@@ -3,13 +3,25 @@
 
 #define CHANCE_DEFAILLANCE 2	//2 chance sur 100 tout les 100km
 
-constexpr int radius_ = 2;
-int x_center = 400;
-int y_center = 400;
+constexpr int radius_ = 5;
+
+void update_avion(Avion& avion, bool& stop_thread) {
+	while (!stop_thread) {
+		std::this_thread::sleep_for(1s);
+		if (avion.get_x() == avion.get_aeroport_arrive_x() && avion.get_y() == avion.get_aeroport_arrive_y())
+			avion.circle_trajectory();
+		else avion.line_trajectory();
+	}
+}
 
 
-Avion::Avion(sf::Texture Texture) {
-	sprite.setTexture(&Texture);
+Avion::Avion(sf::Texture Texture, float speed, float aeroport_depart_x, float aeroport_depart_y, float aeroport_arrive_x, float aeroport_arrive_y):	
+	aeroport_depart_x(aeroport_depart_x),aeroport_depart_y(aeroport_depart_y),
+	aeroport_arrive_x(aeroport_arrive_x),aeroport_arrive_y(aeroport_arrive_y),
+	speed_(speed)
+{
+	sprite.setTexture(&Texture);	
+	sprite.setPosition(aeroport_depart_x,aeroport_depart_y);
 	stop_thread = false;
 	initial_clock_ = high_resolution_clock::now();	
 	t_ = std::thread(update_avion, std::ref(*this), std::ref(stop_thread));
@@ -21,8 +33,8 @@ void Avion::circle_trajectory() {
 	initial_clock_ = current_clock;
 	//Do circles around an aeroprt
 	angle_ -= rotation_speed * static_cast<float>(dt);
-	x_ = (radius_ * cos(angle_)) + x_center;
-	y_ = (radius_ * sin(angle_)) + y_center;
+	x_ = (radius_ * cos(angle_)) + aeroport_arrive_x;
+	y_ = (radius_ * sin(angle_)) + aeroport_arrive_y;
 	
 }
 
@@ -31,8 +43,8 @@ void Avion::line_trajectory() {
 	auto dt = (current_clock - initial_clock_).count() / 1e9;
 	initial_clock_ = current_clock;
 	//Do moving from aeroport 1 to 2
-	float distance_x = aeorport_arrive_x - aeorport_depart_x;
-	float distance_y = aeorport_arrive_y - aeorport_depart_y;
+	float distance_x = aeroport_arrive_x - aeroport_depart_x;
+	float distance_y = aeroport_arrive_y - aeroport_depart_y;
 	float distance_total = sqrt(distance_x * distance_x + distance_y * distance_y);
 	x_ += distance_x/distance_total * speed_;
 	y_ += distance_y/ distance_total * speed_;	
@@ -50,12 +62,7 @@ sf::RectangleShape Avion::update_sprite() {
 }
 
 
-void update_avion(Avion& avion, bool& stop_thread) {
-	while (!stop_thread) {
-		std::this_thread::sleep_for(1s);
-		avion.line_trajectory();
-	}
-}
+
 
 const std::string Avion::get_flight_number() { return code_de_vol; }
 
@@ -66,6 +73,14 @@ float Avion::get_altitude() { return altitude; }
 float Avion::get_x() { return x_; }
 
 float Avion::get_y() { return y_; }
+
+float Avion::get_aeroport_arrive_x() { return aeroport_arrive_x; }
+
+float Avion::get_aeroport_arrive_y() { return aeroport_arrive_y; }
+
+float Avion::get_aeroport_depart_x() { return aeroport_depart_x; }
+
+float Avion::get_aeroport_depart_y() { return aeroport_depart_y; }
 
 float Avion::get_angle() { return angle_; }
 
