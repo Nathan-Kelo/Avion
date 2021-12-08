@@ -8,8 +8,10 @@ constexpr int radius_ = 5;
 void update_avion(Avion& avion, bool& stop_thread) {
 	while (!stop_thread) {
 		std::this_thread::sleep_for(1s);
-		if (avion.get_x() == avion.get_aeroport_arrive_x() && avion.get_y() == avion.get_aeroport_arrive_y())
+		if (avion.get_distance_parcouru_trajet() > avion.get_distance_total())
+		{
 			avion.circle_trajectory();
+		}
 		else avion.line_trajectory();
 	}
 }
@@ -18,8 +20,8 @@ void update_avion(Avion& avion, bool& stop_thread) {
 Avion::Avion(const sf::Texture Texture, float speed, float aeroport_depart_x, float aeroport_depart_y, float aeroport_arrive_x, float aeroport_arrive_y):	
 	aeroport_depart_x(aeroport_depart_x),aeroport_depart_y(aeroport_depart_y),
 	aeroport_arrive_x(aeroport_arrive_x),aeroport_arrive_y(aeroport_arrive_y),
-	speed_(speed),x_(aeroport_depart_x),y_(aeroport_depart_y)
-	
+	speed_(speed),x_(aeroport_depart_x),y_(aeroport_depart_y),
+	distance_parcouru_trajet(0),distance_total(0)
 {	
 	sprite.setSize(sf::Vector2f(50, 50));
 	sprite.setTexture(&Texture);	
@@ -49,9 +51,10 @@ void Avion::line_trajectory() {
 	//Do moving from aeroport 1 to 2
 	float distance_x = aeroport_arrive_x - aeroport_depart_x;
 	float distance_y = aeroport_arrive_y - aeroport_depart_y;
-	float distance_total = sqrt(distance_x * distance_x + distance_y * distance_y);
+	distance_total = sqrt(distance_x * distance_x + distance_y * distance_y);
 	x_ += distance_x / distance_total * speed_;
 	y_ += distance_y / distance_total * speed_;
+	distance_parcouru_trajet = sqrt((x_-aeroport_depart_x) * (x_ - aeroport_depart_x) + (y_ - aeroport_depart_y) * (y_ - aeroport_depart_y));
 	//TODO rotation and angle of plane 
 	std::cout << "--------We are doing a line trajectory--------\n\tx :" << x_ << "\n\ty :" << y_ << std::endl;
 }
@@ -88,6 +91,10 @@ float Avion::get_aeroport_depart_x() { return aeroport_depart_x; }
 float Avion::get_aeroport_depart_y() { return aeroport_depart_y; }
 
 float Avion::get_angle() { return angle_; }
+
+float Avion::get_distance_parcouru_trajet() { return distance_parcouru_trajet; }
+
+float Avion::get_distance_total() { return distance_total; }
 
 /*
 float Avion::get_niveau_essence() {

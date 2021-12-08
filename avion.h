@@ -33,7 +33,9 @@ private:
 	float aeroport_depart_x = 0.;
 	float aeroport_depart_y = 0.;
 	float aeroport_arrive_x = 0.;
-	float aeroport_arrive_y = 0.;
+	float aeroport_arrive_y = 0.;				
+	float distance_parcouru_trajet = 0.;		//Distance parcouru par l'avion
+	float distance_total = 0.;					//Distance entre les deux aeroports
 	/*	
 	float niveau_essence;
 	float consomation_essence;	
@@ -54,6 +56,8 @@ public:
 	float get_aeroport_arrive_y();
 	float get_aeroport_depart_x();
 	float get_aeroport_depart_y();
+	float get_distance_parcouru_trajet();
+	float get_distance_total();
 	const std::string get_flight_number();
 	~Avion();
 	/*std::string get_aeroport_depart();
