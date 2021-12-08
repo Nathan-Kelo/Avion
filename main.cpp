@@ -27,14 +27,13 @@ void doCircle(sf::RectangleShape& plane) {
 }
 
 int main() {
-	/*
-		//std::ifstream listavion("files/listavion.json");
+	//std::ifstream listavion("files/listavion.json");
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE.x,WINDOW_SIZE.y), "My window");
 	window.setVerticalSyncEnabled(true);
 	
 	sf::Texture planetexture;
 	sf::Texture backgroundtexture;
-	sf::RectangleShape plane1(PLANE_SIZE);
+	
 	sf::RectangleShape background(sf::Vector2f(WINDOW_SIZE.x,WINDOW_SIZE.y));
 
 	if (!planetexture.loadFromFile("files/airplane.png")) {
@@ -53,7 +52,7 @@ int main() {
 
 	background.setTexture(&backgroundtexture);
 	
-	plane1.setTexture(&planetexture);
+	//Avion plane1();//NEED TO PUT IN ALL THE ARGS	
 	
 	
 	while (window.isOpen()) {
@@ -64,8 +63,8 @@ int main() {
 
 		window.clear(sf::Color::Black);
 		window.draw(background);
-		window.draw(plane1);
-		doCircle(plane1);
+		
+		
 		window.display();
 	}
 	/*json avions;
