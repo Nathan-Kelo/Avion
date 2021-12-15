@@ -56,15 +56,10 @@ void Avion::line_trajectory() {
 	y_ += distance_y / distance_total * speed_;
 	distance_parcouru_trajet = sqrt((x_-aeroport_depart_x) * (x_ - aeroport_depart_x) + (y_ - aeroport_depart_y) * (y_ - aeroport_depart_y));
 
-	//TODO rotation and angle of plane
-	std::cout << distance_x << " NTM x" << std::endl;
-	std::cout << distance_y << " NTM y" << std::endl;
 	if(distance_x<0){
-		std::cout << "200,200 : "<< acos(distance_y / std::sqrt(std::pow(distance_x, 2) + std::pow(distance_y, 2)))/(PI_F / 180.f) <<std::endl;
 		angle_ = 180+acos(distance_y / std::sqrt(std::pow(distance_x, 2) + std::pow(distance_y, 2))) / (PI_F / 180.f);
 	}
 	else {
-		//std::cout << 360-acos(distance_y / std::pow(std::pow(distance_x, 2) + std::pow(distance_y, 2), 1 / 2));
 		angle_ = 180-acos(distance_y / std::sqrt(std::pow(distance_x, 2) + std::pow(distance_y, 2))) / (PI_F / 180.f);
 	}
 
