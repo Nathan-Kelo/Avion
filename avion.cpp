@@ -24,7 +24,7 @@ Avion::Avion(sf::Texture &Texture, float speed,float init_angle, float aeroport_
 {	
 	sprite.setSize(sf::Vector2f(50, 50));
 	sprite.setTexture(&Texture);	
-	sprite.setPosition(aeroport_depart_x,aeroport_depart_y);
+	sprite.setPosition(sf::Vector2f(aeroport_depart_x,aeroport_depart_y));
 	if (sprite.getTexture())std::cout << "We have a texture for the plane" << std::endl;
 	else std::cout << "We dont have a texture for the plane" << std::endl;
 	stop_thread = false;
@@ -63,7 +63,7 @@ Avion::~Avion() {
 }
 
 sf::RectangleShape Avion::update_sprite() {
-	sprite.setPosition(get_x(), get_y());
+	sprite.setPosition(sf::Vector2f(get_x(), get_y()));
 	sprite.setRotation(get_angle());
 	return sprite;
 }
