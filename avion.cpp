@@ -39,7 +39,7 @@ void Avion::circle_trajectory() {
 	angle_ -= rotation_speed * static_cast<float>(dt);
 	x_ = (radius_ * cos(angle_)) + aeroport_arrive_x;
 	y_ = (radius_ * sin(angle_)) + aeroport_arrive_y;
-	std::cout << "--------We are doing a circle trajectory--------\n\tx :" << x_ << "\n\ty :" << y_ << std::endl;
+	//std::cout << "--------We are doing a circle trajectory--------\n\tx :" << x_ << "\n\ty :" << y_ << std::endl;
 }
 
 void Avion::line_trajectory() {
@@ -61,7 +61,7 @@ void Avion::line_trajectory() {
 		angle_ = 180-acos(distance_y / std::sqrt(std::pow(distance_x, 2) + std::pow(distance_y, 2))) / (PI_F / 180.f);
 	}
 
-	std::cout << "--------We are doing a line trajectory--------\n\tx :" << x_ << "\n\ty :" << y_ << std::endl;
+	//std::cout << "--------We are doing a line trajectory--------\n\tx :" << x_ << "\n\ty :" << y_ << std::endl;
 }
 Avion::~Avion() {
 	stop_thread = true;
