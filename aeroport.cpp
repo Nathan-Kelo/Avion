@@ -3,19 +3,22 @@
 
 
 std::string Aeroport::get_name() {
-	return name;
+	return this->name;
 }
 
-int Aeroport::get_coord_x() {
-	return coord_x;
+void Aeroport::set_name(string nom) {
+	this->name = nom;
+}
+int Aeroport::set_coord_x(int posx) {
+	this->coord_x = posx;
+}
+int Aeroport::set_coord_y(int posy) {
+	this->coord_y = posy;
 }
 
-int Aeroport::get_coord_y() {
-	return coord_y;
-}
 
 void Aeroport::set_max_places(int places) {
-	max_places = places;
+	this->max_places = places;
 }
 
 void Aeroport::avion_arrive(Avion plane) {
@@ -25,3 +28,4 @@ void Aeroport::avion_arrive(Avion plane) {
 void Aeroport::avion_depart(Avion plane) {
 	hangar.erase(plane);
 }
+
