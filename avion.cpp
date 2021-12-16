@@ -26,8 +26,6 @@ Avion::Avion(sf::Texture &Texture, float speed,float init_angle, float aeroport_
 	sprite.setSize(sf::Vector2f(50, 50));
 	sprite.setTexture(&Texture);	
 	sprite.setPosition(sf::Vector2f(aeroport_depart_x,aeroport_depart_y));
-	if (sprite.getTexture())std::cout << "We have a texture for the plane" << std::endl;
-	else std::cout << "We dont have a texture for the plane" << std::endl;
 	stop_thread = false;
 	initial_clock_ = high_resolution_clock::now();	
 	t_ = std::thread(update_avion, std::ref(*this), std::ref(stop_thread));
