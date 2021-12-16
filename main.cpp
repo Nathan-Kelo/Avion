@@ -39,6 +39,18 @@ void visualization(std::vector<std::unique_ptr<Avion>>& avions, std::vector<Aero
 	sf::RectangleShape background(sf::Vector2f(WINDOW_SIZE.x, WINDOW_SIZE.y));
 	background.setTexture(&backgroundtexture);
 
+	sf::Texture airporttexture;
+	if (!airporttexture.loadFromFile("files/airport.png")) {
+		std::cerr << "Failed to load texture for airport" << std::endl;
+		return;
+	}
+	sf::RectangleShape sprite;
+	sprite.setSize(sf::Vector2f(50, 50));
+	sprite.setTexture(&airporttexture);
+	for (auto& airport : airports) {
+		sprite.setPosition(sf::Vector2f(airport.get_coord_x(), airport.get_coord_y()));
+	}
+
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -47,9 +59,7 @@ void visualization(std::vector<std::unique_ptr<Avion>>& avions, std::vector<Aero
 		window.clear();
 		//window.draw(background);
 
-		for (auto& airports : airports) {
-			window.draw(airports.getSprite());
-		}
+		window.draw(sprite);
 
 		//window.draw(airports[4].getSprite());
 		//window.draw(airports[1].getSprite());
@@ -78,17 +88,17 @@ int main() {
 		return -1;
 	}
 	
-	Aeroport Lille(airporttexture, 150, 150, randomp(rng));
-	Aeroport Paris(airporttexture, 350, 350, randomp(rng));
-	Aeroport Lyon(airporttexture, randomx(rng), randomy(rng), randomp(rng));
+	Aeroport Lille(randomx(rng), randomy(rng), randomp(rng));
+	Aeroport Paris(randomx(rng), randomy(rng), randomp(rng));
+	/*Aeroport Lyon(airporttexture, randomx(rng), randomy(rng), randomp(rng));
 	Aeroport Marseille(airporttexture, randomx(rng), randomy(rng), randomp(rng));
-	Aeroport Bordeaux(airporttexture, randomx(rng), randomy(rng), randomp(rng));
+	Aeroport Bordeaux(airporttexture, randomx(rng), randomy(rng), randomp(rng));*/
 	
 	//std::vector<std::unique_ptr<Aeroport>> airports;
 	std::vector<Aeroport> airports;
 
-	airports.push_back(std::move(Lille));
-	airports.push_back(std::move(Paris));
+	airports.push_back(std::move(std::move(Lille)));
+	airports.push_back(std::move(std::move(Paris)));
 	/*airports.push_back(std::move(Marseille));
 	airports.push_back(std::move(Lyon));
 	airports.push_back(std::move(Bordeaux));*/
@@ -116,9 +126,6 @@ int main() {
 	}
 
 	//Avion plane1;//NEED TO PUT IN ALL THE ARGS	
-
-	//avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, airports[0]->get_coord_x(), airports[0]->get_coord_y(), airports[1]->get_coord_x(), airports[1]->get_coord_y()));
-	//avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, airports[1]->get_coord_x(), airports[1]->get_coord_y(), airports[0]->get_coord_x(), airports[0]->get_coord_y()));
 
 	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, airports[0].get_coord_x(), airports[0].get_coord_y(), airports[1].get_coord_x(), airports[1].get_coord_y()));
 	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, airports[1].get_coord_x(), airports[1].get_coord_y(), airports[0].get_coord_x(), airports[0].get_coord_y()));

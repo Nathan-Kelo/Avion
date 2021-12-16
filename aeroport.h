@@ -8,10 +8,9 @@ private:
 	int coord_x;
 	int coord_y;
 	int max_places;
-	sf::RectangleShape sprite;
 	std::vector<Avion> hangar;
 public:
-	Aeroport(sf::Texture& Texture, int coordx, int coordy, int maxplaces) {}
+	Aeroport(int coordx, int coordy, int maxplaces) {}
 	std::string get_name();
 	//void set_name(std::string nom);
 	void set_coord_x(int posx);
@@ -25,6 +24,5 @@ public:
 	void set_max_places(int places);
 	void avion_arrive(Avion plane);
 	void avion_depart(Avion plane);
-	sf::RectangleShape getSprite();
 
 };
