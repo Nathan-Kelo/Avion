@@ -23,37 +23,33 @@ const sf::Vector2u WINDOW_SIZE(800, 600);
 const sf::Vector2f PLANE_SIZE(100, 100);
 const sf::Vector2f circle_vector(1, 1);
 
-Aeroport random(std::vector <Aeroport> airports) {
-	std::random_device rd;     // only used once to initialise (seed) engine
-	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
-	std::uniform_int_distribution<int> al(0, 5); // guaranteed unbiased
-
-	Aeroport a(0,0,0);
-	int tmp = al(rng);
-	switch (tmp) {
-	case 0:
-		a.set_coord_x(airports[0].get_coord_x());
-		a.set_coord_y(airports[0].get_coord_y());
-		break;
-	case 1:
-		a.set_coord_x(airports[1].get_coord_x());
-		a.set_coord_y(airports[1].get_coord_y());
-		break;
-	case 2:
-		a.set_coord_x(airports[2].get_coord_x());
-		a.set_coord_y(airports[2].get_coord_y());
-		break;
-	case 3:
-		a.set_coord_x(airports[3].get_coord_x());
-		a.set_coord_y(airports[3].get_coord_y());
-		break;
-	case 4:
-		a.set_coord_x(airports[4].get_coord_x());
-		a.set_coord_y(airports[4].get_coord_y());
-		break;
-	}
-	return a;
-}
+//Aeroport random(std::vector <Aeroport> &airports, int r) {
+//
+//	Aeroport a(0,0,0);
+//	switch (r) {
+//	case 0:
+//		a.set_coord_x(airports[0].get_coord_x());
+//		a.set_coord_y(airports[0].get_coord_y());
+//		break;
+//	case 1:
+//		a.set_coord_x(airports[1].get_coord_x());
+//		a.set_coord_y(airports[1].get_coord_y());
+//		break;
+//	case 2:
+//		a.set_coord_x(airports[2].get_coord_x());
+//		a.set_coord_y(airports[2].get_coord_y());
+//		break;
+//	case 3:
+//		a.set_coord_x(airports[3].get_coord_x());
+//		a.set_coord_y(airports[3].get_coord_y());
+//		break;
+//	case 4:
+//		a.set_coord_x(airports[4].get_coord_x());
+//		a.set_coord_y(airports[4].get_coord_y());
+//		break;
+//	}
+//	return a;
+//}
 
 void doCircle(sf::RectangleShape& plane) {
 	plane.move(circle_vector);
@@ -147,7 +143,7 @@ int main() {
 	airports.push_back(std::move(Lyon));
 	airports.push_back(std::move(Bordeaux));
 
-
+	std::uniform_int_distribution<int> r(0, airports.size()); // guaranteed unbiased
 	/*std::cout << "------valeurs coordS------";
 	std::cout << Lille.get_coord_x() << std::endl;
 	std::cout << Lille.get_coord_y() << std::endl;
@@ -168,13 +164,19 @@ int main() {
 
 	//Avion plane1;//NEED TO PUT IN ALL THE ARGS	
 
-	/*for (int i = 0; i < nb_avions; i++) {
-		Aeroport depart = random(airports);
-		Aeroport arrivee = random(airports);
-		avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, depart.get_coord_x(), depart.get_coord_y(), arrivee.get_coord_x(), arrivee.get_coord_y()));
-	}*/
+	//for (int i = 0; i < nb_avions; i++) {
+	//	Aeroport depart = airports[r(rng)];
+	//	std::cout << " " << depart.get_coord_x() << " " << depart.get_coord_y();
+	//	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, depart.get_coord_x(), depart.get_coord_y(), arrivee.get_coord_x(), arrivee.get_coord_y()));
+	//}
 	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, Lille.get_coord_x(), Lille.get_coord_y(), Paris.get_coord_x(), Paris.get_coord_y()));
+	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, Bordeaux.get_coord_x(), Bordeaux.get_coord_y(), Lille.get_coord_x(), Lille.get_coord_y()));
+	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, Lyon.get_coord_x(), Lyon.get_coord_y(), Marseille.get_coord_x(), Marseille.get_coord_y()));
+	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, Lyon.get_coord_x(), Lyon.get_coord_y(), Bordeaux.get_coord_x(), Bordeaux.get_coord_y()));
 	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, Paris.get_coord_x(), Paris.get_coord_y(), Lille.get_coord_x(), Lille.get_coord_y()));
+	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, Bordeaux.get_coord_x(), Bordeaux.get_coord_y(), Paris.get_coord_x(), Paris.get_coord_y()));
+	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, Marseille.get_coord_x(), Marseille.get_coord_y(), Paris.get_coord_x(), Paris.get_coord_y()));
+	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, Lille.get_coord_x(), Lille.get_coord_y(), Lyon.get_coord_x(), Lyon.get_coord_y()));
 
 	std::thread UI(visualization, std::ref(avions), std::ref(airports));
 
