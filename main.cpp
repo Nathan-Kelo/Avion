@@ -27,7 +27,7 @@ void doCircle(sf::RectangleShape& plane) {
 	plane.rotate(1);
 }
 
-void visualization(std::vector<std::unique_ptr<Avion>>& avions, std::vector < std::unique_ptr<Aeroport>>& airports) {
+void visualization(std::vector<std::unique_ptr<Avion>>& avions, std::vector<Aeroport>& airports) {
 	sf::RenderWindow window(sf::VideoMode(WINDOW_SIZE.x, WINDOW_SIZE.y), "My window");
 	window.setVerticalSyncEnabled(true);
 
@@ -48,7 +48,7 @@ void visualization(std::vector<std::unique_ptr<Avion>>& avions, std::vector < st
 		//window.draw(background);
 
 		for (auto& airports : airports) {
-			window.draw(airports->getSprite());
+			window.draw(airports.getSprite());
 		}
 
 		//window.draw(airports[4].getSprite());
@@ -84,16 +84,17 @@ int main() {
 	Aeroport Marseille(airporttexture, randomx(rng), randomy(rng), randomp(rng));
 	Aeroport Bordeaux(airporttexture, randomx(rng), randomy(rng), randomp(rng));
 	
-	std::vector<std::unique_ptr<Aeroport>> airports;
+	//std::vector<std::unique_ptr<Aeroport>> airports;
+	std::vector<Aeroport> airports;
 
-	/*airports.push_back(std::move(Lille));
+	airports.push_back(std::move(Lille));
 	airports.push_back(std::move(Paris));
-	airports.push_back(std::move(Marseille));
+	/*airports.push_back(std::move(Marseille));
 	airports.push_back(std::move(Lyon));
 	airports.push_back(std::move(Bordeaux));*/
 
-	airports.push_back(std::make_unique <Aeroport>(airporttexture, 150, 150, randomp(rng)));
-	airports.push_back(std::make_unique<Aeroport>(airporttexture, 100, 100, 10));
+	/*airports.push_back(std::make_unique <Aeroport>(airporttexture, 150, 150, randomp(rng)));
+	airports.push_back(std::make_unique<Aeroport>(airporttexture, 100, 100, 10));*/
 
 
 	std::cout << "------valeurs coordS------";
@@ -116,8 +117,11 @@ int main() {
 
 	//Avion plane1;//NEED TO PUT IN ALL THE ARGS	
 
-	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, airports[0]->get_coord_x(), airports[0]->get_coord_y(), airports[1]->get_coord_x(), airports[1]->get_coord_y()));
-	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, airports[1]->get_coord_x(), airports[1]->get_coord_y(), airports[0]->get_coord_x(), airports[0]->get_coord_y()));
+	//avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, airports[0]->get_coord_x(), airports[0]->get_coord_y(), airports[1]->get_coord_x(), airports[1]->get_coord_y()));
+	//avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, airports[1]->get_coord_x(), airports[1]->get_coord_y(), airports[0]->get_coord_x(), airports[0]->get_coord_y()));
+
+	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, airports[0].get_coord_x(), airports[0].get_coord_y(), airports[1].get_coord_x(), airports[1].get_coord_y()));
+	avions.push_back(std::make_unique<Avion>(planeTexture, base_speed * 2, 25.f, airports[1].get_coord_x(), airports[1].get_coord_y(), airports[0].get_coord_x(), airports[0].get_coord_y()));
 
 
 	std::thread UI(visualization, std::ref(avions), std::ref(airports));
